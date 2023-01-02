@@ -40,7 +40,7 @@ const orderSchema = new mongoose.Schema(
       enum: Object.values(orderStatus),
       default: orderStatus.ORDERED,
     },
-    paymentStatus: {
+    paymentMode: {
       type: String,
       required: true,
       enum: Object.values(paymentMode),
