@@ -4,7 +4,7 @@ import CustomError from "../utils/customError";
 import JWT from "jsonwebtoken";
 import config from "../config/index";
 
-export const isLoggedin = asyncHandler(async (req, res, next) => {
+export const isLoggedin = asyncHandler(async (req, _res, next) => {
   let token;
   if (
     req.cookies.token ||
