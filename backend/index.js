@@ -22,4 +22,4 @@ import config from "./config/index";
     console.log(error);
     throw error;
   }
-})();
+})(); // IIFE
