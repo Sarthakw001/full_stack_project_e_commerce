@@ -12,7 +12,7 @@ import CustomError from "../utils/customError";
 export const createCollection = asyncHandler(async (req, res) => {
   const { name } = req.body;
   if (!name) {
-    throw new CustomError("Collection name is required", 400);
+    throw new CustomErgit ror("Collection name is required", 400);
   }
   const collection = await Collection.create({
     name,
@@ -52,13 +52,13 @@ export const updateCollection = asyncHandler(async (req, res) => {
       runValidators: true,
     }
   );
-  if(!updatedCollection){
+  if (!updatedCollection) {
     throw new CustomError("Collection not found", 400);
   }
   res.status(200).json({
-    success:true,
-    message:"collection updated succesfully",
-    updateCollection
+    success: true,
+    message: "collection updated succesfully",
+    updateCollection,
   });
 });
 
@@ -70,21 +70,19 @@ export const updateCollection = asyncHandler(async (req, res) => {
  * @return User Object
  ***********************************************************/
 
+export const deleteCollection = asyncHandler(async (req, res) => {
+  const { id: collectionId } = req.params;
 
-export const deleteCollection = asyncHandler(async(req,res)=>{
-    const {id:collectionId} = req.params
+  const deletedCollection = await Collection.findByIdAndDelete(collectionId);
 
-    const deletedCollection = await Collection.findByIdAndDelete(collectionId);
-
-    if(!deleteCollection){
-        throw new CustomError("Collection not found", 400);
-    }
-    res.status(200).json({
-        success:true,
-        message:"collection deleted succesfully",
-      });
-})
-
+  if (!deleteCollection) {
+    throw new CustomError("Collection not found", 400);
+  }
+  res.status(200).json({
+    success: true,
+    message: "collection deleted succesfully",
+  });
+});
 
 /***********************************************************
  * @Get a list of Collection
@@ -94,14 +92,14 @@ export const deleteCollection = asyncHandler(async(req,res)=>{
  * @return User Object
  ***********************************************************/
 
-export const getAllCollection = asyncHandler(async(_req,res)=>{
-    const collections = await Collection.find();
+export const getAllCollection = asyncHandler(async (_req, res) => {
+  const collections = await Collection.find();
 
-    if(!collections){
-        throw new CustomError("Collection not found", 400);
-    }
-    res.status(200).json({
-        success:true,
-        collections
-    })
-})
+  if (!collections) {
+    throw new CustomError("Collection not found", 400);
+  }
+  res.status(200).json({
+    success: true,
+    collections,
+  });
+});
