@@ -12,7 +12,7 @@ import CustomError from "../utils/customError";
 export const createCollection = asyncHandler(async (req, res) => {
   const { name } = req.body;
   if (!name) {
-    throw new CustomErgit ror("Collection name is required", 400);
+    throw new CustomError ("Collection name is required", 400);
   }
   const collection = await Collection.create({
     name,
