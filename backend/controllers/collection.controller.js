@@ -12,7 +12,7 @@ import CustomError from "../utils/customError";
 export const createCollection = asyncHandler(async (req, res) => {
   const { name } = req.body;
   if (!name) {
-    throw new CustomError ("Collection name is required", 400);
+    throw new CustomError("Collection name is required", 400);
   }
   const collection = await Collection.create({
     name,
@@ -26,7 +26,7 @@ export const createCollection = asyncHandler(async (req, res) => {
 
 /***********************************************************
  * @Update Collection
- * @route http://localhost:/api/collection
+ * @route http://localhost:/api/collection/
  * @description User signup controller for creating new user
  * @parameters name,email,password
  * @return User Object
@@ -64,7 +64,7 @@ export const updateCollection = asyncHandler(async (req, res) => {
 
 /***********************************************************
  * @Delete Collection
- * @route http://localhost:/api/collection
+ * @route http://localhost:/api/collection/
  * @description User signup controller for creating new user
  * @parameters name,email,password
  * @return User Object

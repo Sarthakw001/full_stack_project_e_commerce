@@ -12,12 +12,11 @@ import config from "./config/index";
       throw err;
     });
 
-    const onListening = () =>{
-        console.log(`Listening on ${config.PORT}`);
-    }
+    const onListening = () => {
+      console.log(`Listening on ${config.PORT}`);
+    };
 
-    app.listen(config.PORT,onListening);
-    
+    app.listen(config.PORT, onListening);
   } catch (error) {
     console.log(error);
     throw error;

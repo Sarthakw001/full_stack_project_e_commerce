@@ -12,6 +12,4 @@ app.use(cookieparser());
 
 app.use(morgan("tiny"));
 
-
-
 export default app;

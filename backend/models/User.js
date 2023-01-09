@@ -3,7 +3,7 @@ import authRoles from "../utils/authRoles";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 import crypto from "crypto";
-import config from '../config/index';
+import config from "../config/index";
 
 const userSchema = mongoose.Schema(
   {
@@ -46,31 +46,33 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-
 userSchema.methods = {
-    comparePassword : async function(enteredPassword){
-       return await bcrypt.compare(enteredPassword,this.password);
-    },
-    getJwtToken :  async function(){
-        return JWT.sign(
-            {
-                _id : this._id,
-                role : this.role,
-            },
-            config.JWT_SECRET,
-            {
-                expiresIn : config.JWT_SECRET
-            }
-        )
-    },
-    generateForgotPasswordToken : function(){
-        const forgotToken = crypto.randomBytes(10).toString('hex');
+  comparePassword: async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password);
+  },
+  getJwtToken: async function () {
+    return JWT.sign(
+      {
+        _id: this._id,
+        role: this.role,
+      },
+      config.JWT_SECRET,
+      {
+        expiresIn: config.JWT_SECRET,
+      }
+    );
+  },
+  generateForgotPasswordToken: function () {
+    const forgotToken = crypto.randomBytes(10).toString("hex");
 
-        this.forgotPasswordToken = crypto.createHash('sha256').update(forgotToken).digest('hex');
-        this.forgotPasswordExpiry = Date.now() + 15*60*1000;
+    this.forgotPasswordToken = crypto
+      .createHash("sha256")
+      .update(forgotToken)
+      .digest("hex");
+    this.forgotPasswordExpiry = Date.now() + 15 * 60 * 1000;
 
-        return forgotToken;
-    }
-}
+    return forgotToken;
+  },
+};
 
 export default mongoose.model("User", userSchema);
